@@ -1,0 +1,699 @@
+/* ============================================
+   WebAR Exhibition - AR Viewer Styles
+   Mobile-First, High-Contrast UI
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #22d3ee;
+    --background-dark: #0f0f1a;
+    --background-card: #1a1a2e;
+    --background-overlay: rgba(15, 15, 26, 0.95);
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --border-radius: 12px;
+    --border-radius-lg: 20px;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+        Cantarell, sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Loading Screen
+   ============================================ */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-dark);
+    z-index: 1000;
+    transition: opacity var(--transition-normal);
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1.5rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.loading-progress {
+    width: 200px;
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    margin: 0 auto 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    border-radius: 2px;
+    transition: width var(--transition-fast);
+}
+
+.loading-percent {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   Error Screen
+   ============================================ */
+.error-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-dark);
+    z-index: 1000;
+}
+
+.error-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 320px;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.error-message {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-icon:hover,
+.btn-icon:focus {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.btn-close:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   Main Container
+   ============================================ */
+.main-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-dark);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem;
+    background: linear-gradient(
+        to bottom,
+        var(--background-overlay),
+        transparent
+    );
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.product-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 60px);
+    text-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* ============================================
+   Viewer Container
+   ============================================ */
+.viewer-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1a 100%);
+    --poster-color: transparent;
+}
+
+model-viewer::part(default-ar-button) {
+    display: none;
+}
+
+/* AR Button */
+.ar-button {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.75rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    transition: all var(--transition-normal);
+    z-index: 50;
+}
+
+.ar-button:hover,
+.ar-button:focus {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+}
+
+.ar-button:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+.ar-button svg {
+    flex-shrink: 0;
+}
+
+/* AR Not Supported */
+.ar-not-supported {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.25rem;
+    background: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* Model Loading Progress */
+.model-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--border-color);
+}
+
+.model-progress-bar {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    transition: width var(--transition-fast);
+}
+
+/* Poster Container */
+.poster-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-dark);
+}
+
+.poster-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   Controls Bar
+   ============================================ */
+.controls-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: var(--background-overlay);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 50;
+}
+
+.control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.625rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.control-btn:hover,
+.control-btn:focus {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.control-btn.active {
+    color: var(--primary-color);
+}
+
+.control-btn svg {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Info Panel
+   ============================================ */
+.info-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 60vh;
+    background: var(--background-overlay);
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transform: translateY(100%);
+    transition: transform var(--transition-normal);
+    z-index: 200;
+    overflow: hidden;
+}
+
+.info-panel.visible {
+    transform: translateY(0);
+}
+
+.info-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-panel-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.info-panel-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(60vh - 70px);
+}
+
+.product-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.product-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.meta-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--background-card);
+    border-radius: var(--border-radius);
+}
+
+.meta-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.meta-value {
+    font-weight: 500;
+}
+
+/* ============================================
+   Hints Overlay
+   ============================================ */
+.hints-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: var(--background-overlay);
+    z-index: 150;
+    animation: fadeIn var(--transition-normal);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.hint-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.hint-icon {
+    font-size: 1.5rem;
+}
+
+.btn-dismiss {
+    margin-top: 1rem;
+    padding: 0.875rem 2rem;
+    background: var(--primary-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-dismiss:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   Media Queries - Tablet & Desktop
+   ============================================ */
+@media (min-width: 768px) {
+    .product-name {
+        font-size: 1.5rem;
+    }
+
+    .ar-button {
+        bottom: 120px;
+        padding: 1.125rem 2rem;
+        font-size: 1.125rem;
+    }
+
+    .controls-bar {
+        gap: 1rem;
+        padding: 0.75rem;
+    }
+
+    .control-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.75rem;
+    }
+
+    .info-panel {
+        left: 50%;
+        right: auto;
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+        width: 90%;
+        max-width: 500px;
+        max-height: 70vh;
+        border-radius: var(--border-radius-lg);
+    }
+
+    .info-panel.visible {
+        transform: translate(-50%, 50%);
+    }
+}
+
+/* ============================================
+   Landscape Mode Adjustments
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        padding: 0.75rem;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+
+    .ar-button {
+        bottom: 70px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+    }
+
+    .controls-bar {
+        bottom: 10px;
+        padding: 0.375rem;
+    }
+
+    .control-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.5rem;
+    }
+
+    .control-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ============================================
+   Safe Area Insets (Notch Support)
+   ============================================ */
+@supports (padding: max(0px)) {
+    .header {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+
+    .controls-bar {
+        bottom: max(20px, env(safe-area-inset-bottom));
+    }
+
+    .info-panel-content {
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --background-dark: #000000;
+        --background-card: #1a1a1a;
+        --border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary,
+    .ar-button,
+    .btn-dismiss {
+        border: 2px solid var(--text-primary);
+    }
+}
