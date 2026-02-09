@@ -258,12 +258,37 @@ function setupEventListeners() {
     // AR activation tracking
     elements.modelViewer.addEventListener("ar-status", handleArStatus);
 
+    // Products sidebar toggle
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebar = document.getElementById("products-sidebar");
+    const closeSidebar = document.getElementById("close-sidebar");
+
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener("click", toggleProductsSidebar);
+    }
+    if (closeSidebar && sidebar) {
+        closeSidebar.addEventListener("click", closeProductsSidebar);
+    }
+
     // Close info panel on outside click
     elements.infoPanel.addEventListener("click", (e) => {
         if (e.target === elements.infoPanel) {
             closeInfoPanel();
         }
     });
+
+    // Close sidebar on outside click
+    if (sidebar) {
+        document.addEventListener("click", (e) => {
+            if (
+                sidebar.classList.contains("visible") &&
+                !sidebar.contains(e.target) &&
+                !sidebarToggle.contains(e.target)
+            ) {
+                closeProductsSidebar();
+            }
+        });
+    }
 
     // Keyboard navigation
     document.addEventListener("keydown", handleKeydown);
@@ -283,6 +308,34 @@ function toggleInfoPanel() {
 function closeInfoPanel() {
     elements.infoPanel.classList.add("hidden");
     elements.infoPanel.classList.remove("visible");
+}
+
+/**
+ * Toggle products sidebar visibility
+ */
+function toggleProductsSidebar() {
+    const sidebar = document.getElementById("products-sidebar");
+    const toggle = document.getElementById("sidebar-toggle");
+    if (sidebar) {
+        sidebar.classList.toggle("visible");
+        if (toggle) {
+            toggle.classList.toggle("active");
+        }
+    }
+}
+
+/**
+ * Close products sidebar
+ */
+function closeProductsSidebar() {
+    const sidebar = document.getElementById("products-sidebar");
+    const toggle = document.getElementById("sidebar-toggle");
+    if (sidebar) {
+        sidebar.classList.remove("visible");
+        if (toggle) {
+            toggle.classList.remove("active");
+        }
+    }
 }
 
 /**
@@ -434,6 +487,7 @@ function handleKeydown(event) {
     switch (event.key) {
         case "Escape":
             closeInfoPanel();
+            closeProductsSidebar();
             break;
         case "r":
         case "R":
@@ -446,6 +500,10 @@ function handleKeydown(event) {
         case "i":
         case "I":
             toggleInfoPanel();
+            break;
+        case "p":
+        case "P":
+            toggleProductsSidebar();
             break;
     }
 }

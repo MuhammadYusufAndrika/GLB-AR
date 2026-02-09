@@ -169,6 +169,57 @@
             </div>
             <button class="btn-dismiss" id="dismiss-hints">Got it!</button>
         </div>
+
+        <!-- Products Sidebar -->
+        <div class="products-sidebar" id="products-sidebar">
+            <div class="sidebar-header">
+                <h3>Other Products</h3>
+                <button class="btn-close" id="close-sidebar" aria-label="Close Sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                @if(isset($otherProducts) && $otherProducts->isNotEmpty())
+                    @foreach($otherProducts as $product)
+                        <a href="{{ route('ar.viewer', ['productId' => $product->product_id]) }}" class="product-card-mini">
+                            <div class="product-thumbnail">
+                                @if($product->poster_url)
+                                    <img src="{{ asset('storage/' . $product->poster_url) }}" alt="{{ $product->product_name }}">
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
+                                @endif
+                            </div>
+                            <div class="product-info-mini">
+                                <h4>{{ $product->product_name }}</h4>
+                                @if($product->category)
+                                    <span class="category-badge">{{ $product->category }}</span>
+                                @endif
+                            </div>
+                        </a>
+                    @endforeach
+                @else
+                    <p class="no-products">No other products available</p>
+                @endif
+            </div>
+        </div>
+
+        <!-- Sidebar Toggle Button (Mobile/Desktop) -->
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="View Other Products">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Products</span>
+        </button>
     </div>
 
     <!-- JavaScript -->

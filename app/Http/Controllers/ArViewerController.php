@@ -20,8 +20,17 @@ class ArViewerController extends Controller
         // Get product ID from route parameter or query string
         $productId = $productId ?? $request->query('id');
 
+        // Fetch other active products for sidebar navigation
+        $otherProducts = Product::active()
+            ->where('product_id', '!=', $productId)
+            ->select(['product_id', 'product_name', 'category', 'poster_url'])
+            ->latest()
+            ->take(10)
+            ->get();
+
         return view('ar-viewer', [
             'productId' => $productId,
+            'otherProducts' => $otherProducts,
         ]);
     }
 
