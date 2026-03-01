@@ -81,76 +81,119 @@
             border: 1px solid var(--border-color);
             overflow: hidden;
             transition: all var(--transition);
-            cursor: pointer;
             text-decoration: none;
             color: inherit;
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             border-color: var(--primary-color);
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
         }
 
+        /* ── Rectangular image area ── */
         .product-image {
-            height: 200px;
-            background: linear-gradient(135deg, #1e1e3f, #2a2a4a);
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(160deg, #1e1e3f 0%, #2a2a4a 100%);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition);
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.04);
+        }
+
+        /* Category badge floating over image */
+        .product-image .product-category {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            z-index: 2;
+            margin: 0;
+        }
+
+        /* Placeholder when no poster */
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
         }
-
-        .product-image::before {
+        .product-image-placeholder::before {
             content: '';
             position: absolute;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--primary-color), var(--secondary-color));
             border-radius: 50%;
-            opacity: 0.2;
-            animation: pulse 2s ease-in-out infinite;
+            opacity: 0.12;
+            animation: pulse 2.5s ease-in-out infinite;
         }
-
+        .product-image-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(15,15,26,0.5) 100%);
+        }
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.2); opacity: 0.3; }
+            0%, 100% { transform: scale(1);   opacity: 0.12; }
+            50%       { transform: scale(1.3); opacity: 0.2; }
         }
-
-        .product-image svg {
-            width: 64px;
-            height: 64px;
+        .product-image-placeholder svg {
+            width: 56px;
+            height: 56px;
             color: var(--primary-color);
             position: relative;
             z-index: 1;
+            opacity: 0.7;
         }
 
+        /* ── Content section ── */
         .product-content {
-            padding: 1.25rem;
+            padding: 1.125rem 1.25rem 0.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
         }
 
         .product-category {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.65rem;
             background: rgba(99, 102, 241, 0.15);
             color: var(--primary-color);
-            font-size: 0.75rem;
-            font-weight: 500;
+            font-size: 0.7rem;
+            font-weight: 600;
             border-radius: 20px;
-            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            width: fit-content;
         }
 
         .product-name {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 1.0625rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-primary);
         }
 
         .product-description {
-            font-size: 0.875rem;
+            font-size: 0.84rem;
             color: var(--text-secondary);
+            line-height: 1.55;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -161,33 +204,34 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 1.25rem;
+            padding: 0.875rem 1.25rem;
             border-top: 1px solid var(--border-color);
+            margin-top: auto;
         }
 
         .view-ar-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            gap: 0.45rem;
+            padding: 0.5rem 1.1rem;
             background: var(--primary-color);
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 500;
+            color: #fff;
+            font-size: 0.84rem;
+            font-weight: 600;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: background var(--transition);
         }
-
-        .view-ar-btn:hover {
-            background: var(--primary-hover);
-        }
+        .view-ar-btn:hover { background: var(--primary-hover); }
 
         .product-id {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
+            background: rgba(255,255,255,0.05);
+            padding: 0.2rem 0.45rem;
+            border-radius: 4px;
         }
 
         /* Empty State */
@@ -252,23 +296,29 @@
                 @foreach($products as $product)
                     <a href="{{ route('ar.viewer', ['productId' => $product->product_id]) }}" class="product-card">
                         <div class="product-image">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
-                        </div>
-                        <div class="product-content">
                             @if($product->category)
                                 <span class="product-category">{{ $product->category }}</span>
                             @endif
+                            @if($product->poster_url)
+                                <img src="{{ asset('storage/' . $product->poster_url) }}" alt="{{ $product->product_name }}">
+                            @else
+                                <div class="product-image-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="product-content">
                             <h2 class="product-name">{{ $product->product_name }}</h2>
                             <p class="product-description">{{ $product->description }}</p>
                         </div>
                         <div class="product-footer">
                             <span class="product-id">{{ $product->product_id }}</span>
                             <span class="view-ar-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                                     <path d="M2 17l10 5 10-5"></path>
                                     <path d="M2 12l10 5 10-5"></path>
