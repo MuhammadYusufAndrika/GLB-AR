@@ -81,7 +81,7 @@ class ProductController extends Controller
     {
         $viewerUrl = route('ar.viewer', ['productId' => $product->product_id]);
         
-        // Generate QR code as SVG for display
+        
         $qrCode = QrCode::size(300)
             ->backgroundColor(255, 255, 255)
             ->color(0, 0, 0)
@@ -91,17 +91,12 @@ class ProductController extends Controller
         return view('admin.products.show', compact('product', 'qrCode', 'viewerUrl'));
     }
 
-    /**
-     * Show the form for editing the specified product.
-     */
     public function edit(Product $product): View
     {
         return view('admin.products.edit', compact('product'));
     }
+    
 
-    /**
-     * Update the specified product.
-     */
     public function update(Request $request, Product $product): RedirectResponse
     {
         $validated = $request->validate([
