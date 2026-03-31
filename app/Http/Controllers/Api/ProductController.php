@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Get all active products.
-     */
     public function index(): JsonResponse
     {
         $products = Product::active()
@@ -24,9 +21,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Get a specific product by product_id.
-     */
+    
     public function show(string $productId): JsonResponse
     {
         $product = Product::active()
