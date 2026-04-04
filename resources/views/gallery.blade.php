@@ -84,6 +84,11 @@
             font-weight: 400;
             line-height: 1;
         }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
         .navbar-scroll-btn {
             display: inline-flex;
             align-items: center;
@@ -100,6 +105,7 @@
             transition: background var(--ease);
         }
         .navbar-scroll-btn:hover { background: var(--red-dark); }
+        .navbar-scroll-btn.is-active { background: var(--red); }
 
         /* ── About Section ── */
         .about-section {
@@ -510,27 +516,7 @@
 <body>
 
     <!-- ── Navbar ── -->
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a href="#" class="navbar-brand">
-                <div class="navbar-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
-                </div>
-                <div>
-                    {{-- <div class="navbar-name">PT <span>Dahana</span></div> --}}
-                    <span class="navbar-tagline">3D Product Exhibition</span>
-                </div>
-            </a>
-            <a href="#gallery" class="navbar-scroll-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                View Products
-            </a>
-        </div>
-    </nav>
+    @include('partials.public-navbar', ['activePage' => 'home'])
 
     <!-- ── About / Why Dahana Section ── -->
     <section class="about-section">

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 // Home page - Product gallery
 Route::get('/', [ArViewerController::class, 'gallery'])->name('home');
 
+// Products listing with category filters
+Route::get('/products', [ArViewerController::class, 'products'])->name('products.index');
+
 // AR Viewer - Main product viewing page
 Route::get('/view/{productId?}', [ArViewerController::class, 'show'])->name('ar.viewer');
 

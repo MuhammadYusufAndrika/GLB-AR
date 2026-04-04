@@ -49,4 +49,35 @@ class ArViewerController extends Controller
             'products' => $products,
         ]);
     }
+
+    /**
+     * Display a dedicated products page with category filtering.
+     */
+    public function products(Request $request): View
+    {
+        $activeCategory = $request->query('category');
+
+        $categories = Product::active()
+            ->whereNotNull('category')
+            ->select('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category');
+
+        $productsQuery = Product::active()
+            ->select(['id', 'product_id', 'product_name', 'description', 'category', 'poster_url'])
+            ->latest();
+
+        if ($activeCategory) {
+            $productsQuery->where('category', $activeCategory);
+        }
+
+        $products = $productsQuery->get();
+
+        return view('products.index', [
+            'products' => $products,
+            'categories' => $categories,
+            'activeCategory' => $activeCategory,
+        ]);
+    }
 }
