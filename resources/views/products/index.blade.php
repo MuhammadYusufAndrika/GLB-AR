@@ -56,21 +56,31 @@
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.35rem;
             text-decoration: none;
         }
 
         .navbar-logo {
-            width: 40px;
-            height: 40px;
-            background: var(--red);
-            border-radius: 9px;
+            width: 156px;
+            height: 46px;
+            background: transparent;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
         }
 
         .navbar-logo svg { color: #fff; }
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transform: scale(1.3);
+            transform-origin: left center;
+        }
 
         .navbar-tagline {
             font-size: 0.7rem;
@@ -388,6 +398,8 @@
             .product-grid { grid-template-columns: 1fr; }
             .navbar-actions { gap: 0.35rem; }
             .navbar-scroll-btn { padding: 0.45rem 0.7rem; font-size: 0.75rem; }
+            .navbar-brand { gap: 0.2rem; }
+            .navbar-logo { width: 126px; height: 38px; }
         }
     </style>
 </head>

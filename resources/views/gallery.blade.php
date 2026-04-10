@@ -57,19 +57,29 @@
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.35rem;
             text-decoration: none;
         }
         .navbar-logo {
-            width: 40px;
-            height: 40px;
-            background: var(--red);
-            border-radius: 9px;
+            width: 156px;
+            height: 46px;
+            background: transparent;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
         }
         .navbar-logo svg { color: #fff; }
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transform: scale(1.3);
+            transform-origin: left center;
+        }
         .navbar-name {
             font-size: 1.125rem;
             font-weight: 800;
@@ -176,7 +186,9 @@
             overflow: hidden;
         }
         .about-images-placeholder .ph {
-            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border-radius: 8px;
         }
         .about-images-placeholder .ph:first-child {
@@ -510,6 +522,8 @@
             .section-header { flex-direction: column; align-items: flex-start; }
             .product-grid { grid-template-columns: 1fr; }
             .navbar-inner { padding: 0 1.25rem; }
+            .navbar-brand { gap: 0.2rem; }
+            .navbar-logo { width: 126px; height: 38px; }
         }
     </style>
 </head>
@@ -517,6 +531,11 @@
 
     <!-- ── Navbar ── -->
     @include('partials.navbar', ['activePage' => 'home'])
+
+    @php
+        $aboutPlaceholderImages = ['2.jpg', 'image.png', '3.jpg'];
+        $aboutPlaceholderPositions = ['center', 'right center', 'left center'];
+    @endphp
 
     <!-- ── About / Why Dahana Section ── -->
     <section class="about-section">
@@ -526,9 +545,12 @@
             <div class="about-images">
                 <div class="about-ribbon">50+ Years Experience</div>
                 <div class="about-images-placeholder">
-                    <div class="ph"></div>
-                    <div class="ph">    </div>
-                    <div class="ph"></div>
+                    @foreach($aboutPlaceholderImages as $index => $image)
+                        <div
+                            class="ph"
+                            style="background-image: url('{{ asset($image) }}'); background-position: {{ $aboutPlaceholderPositions[$index] ?? 'center' }};"
+                        ></div>
+                    @endforeach
                 </div>
             </div>
 
@@ -608,7 +630,7 @@
                     {{ $products->count() }} products
                 </div>
             </div>
-
+    
             @if($products->isEmpty())
                 <div class="empty-state">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
