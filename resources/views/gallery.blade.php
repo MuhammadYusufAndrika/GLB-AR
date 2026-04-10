@@ -516,7 +516,7 @@
 <body>
 
     <!-- ── Navbar ── -->
-    @include('partials.public-navbar', ['activePage' => 'home'])
+    @include('partials.navbar', ['activePage' => 'home'])
 
     <!-- ── About / Why Dahana Section ── -->
     <section class="about-section">
@@ -541,25 +541,25 @@
                         <span class="bullet">
                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </span>
-                        <span><strong>Total Service Solution</strong> The services of PT are integrated from production of explosives, drilling, and blasting services to other related services, such as demolition, warehousing, consulting and licensing, as well as the mobilization of explosives.</span>
+                        <span><strong>Total Service Solution</strong> Total Service Solution The services of DAHANA are integrated from production of explosives, drilling, and blasting services to other related services, such as demolition, warehousing, consulting and licensing, as well as the mobilization of explosives. For defense such as propellants for large and small munitions, rockets, PETN, and warplane bombs.</span>
+                    </li>
+                    <li>
+                        <span class="bullet">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span> 
+                        <span><strong>Customization</strong> DAHANA is capable of answering any specific challenge in terms of demand for explosives for a variety of terains and purposes.</span>
                     </li>
                     <li>
                         <span class="bullet">
                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </span>
-                        <span><strong>Customization</strong> is capable of answering any specific challenge in terms of demand for explosives for a variety of terrains and purposes.</span>
+                        <span><strong>Local Content</strong>  DAHANA uses local materials in the country for the products and services it produces. It is a form of our care and support for the independence of the nation industry.</span>
                     </li>
                     <li>
                         <span class="bullet">
                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </span>
-                        <span><strong>Local Content</strong> uses local materials in the country for the products and services it produces. It is a form of care and support for the independence of the nation industry.</span>
-                    </li>
-                    <li>
-                        <span class="bullet">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </span>
-                        <span><strong>Go Green</strong> Green Concept applied to both the management of buildings and products, garnering numerous national and international awards.</span>
+                        <span><strong>Go Green</strong> Green Concept which is applied to both the management of the buildings and the products have garnered numerous national and international awards.</span>
                     </li>
                 </ul>
                 <a href="#gallery" class="discover-btn">

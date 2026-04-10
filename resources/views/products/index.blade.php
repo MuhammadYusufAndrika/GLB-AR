@@ -393,7 +393,7 @@
 </head>
 <body>
 
-    @include('partials.public-navbar', ['activePage' => 'products'])
+    @include('partials.navbar', ['activePage' => 'products'])
 
     <section class="products-section">
         <div class="products-inner">
